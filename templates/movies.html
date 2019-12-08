@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Graduation project</title>
+    
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<header class="container-fluid header">
+    <div>
+        <div class="col-md-12">
+            <div  >
+                <div class="col-md-3">
+                    <a class="btn btn-default btn-lg btn__home" href="http://127.0.0.1:5000" role="button">Home</a>
+                </div>
+                <div class="col-md-6 col-md-offset-3">
+                    <h1 class="text-center text__header"><em>Graduation project</em></h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="container movies">
+    <div>
+        <div class="col-md-5 col-md-offset-1">
+            <ol>
+                {%for movie in list_movies%}
+                <li class="h4 movies__name">{{ movie['name'] }}</li>
+                {%endfor%}
+            </ol>
+        </div>
+    </div>
+
+    <div>
+        <div class="col-md-5 col-md-offset-1">
+            <form class="form-inline" method="post" action="/process_movies">
+                <div class=" col-md-4 h4">Премьеры фильмов за:</div>
+                <input type="text" id="inputCity" name="date" class="form-control" placeholder="yyyy-mm-dd" required autofocus>
+                <button type="submit" class="btn btn-default">Find</button>
+            </form>
+            <div class="col-md-12"></div>
+            {{error}}
+            <ol>
+                {%for movie in movies_date%}
+                <li class="h4 movies__name">{{ movie['name'] }}</li>
+                {%endfor%}
+            </ol>
+        </div>
+    </div>
+</div>
+
+<footer class="footer navbar-fixed-bottom row">
+    <div>
+        <div class="col-md-6 col-md-offset-3">
+            <div class="text-center text__footer">2019 Bortnovskiy Gleb</div>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

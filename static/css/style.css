@@ -1,0 +1,70 @@
+/* .row *{
+    min-height: 50px;
+    border: 1px solid #000000;
+    background: #999999;
+} */
+
+.li__links{
+    list-style-type: none;
+}
+
+.text__header{
+    color: rgb(102, 5, 5);
+}
+
+.links{
+    margin-top: 17rem;
+}
+
+.links__text{
+    color: #0e0e2c;
+}
+
+.movies{
+    margin-top: 5rem;
+    margin-bottom: 15rem;
+}
+
+.header{
+    min-height: 70px;
+    border-bottom: 1px solid rgb(57, 75, 94);
+    background: #859871;
+}
+
+.footer{
+    min-height: 70px;
+    border-top: 1px solid rgb(57, 75, 94);
+    background: hsl(88, 16%, 52%);
+}
+
+.text__footer{
+    margin-top: 2rem;
+}
+
+.btn__home{
+    margin-top: 1.4rem;
+    background: #464675;
+    border: #464675;
+    color:#360303
+}
+
+.course__info{
+    margin-top: 1rem;
+    color: #073458;
+}
+
+.movies__name{
+    color: #073458;
+}
+
+.title__courses{
+    color: rgb(3, 28, 49);
+}
+
+.input__city{
+    margin-bottom: 1rem;
+}
+
+.city__weather{
+    margin-top: 1rem;
+}

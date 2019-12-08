@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Graduation project</title>
+
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<header class="container-fluid header">
+    <div>
+        <div class="col-md-12">
+            <div>
+                <div class="col-md-3">
+                    <a class="btn btn-default btn-lg btn__home" href="http://127.0.0.1:5000" role="button">Home</a>
+                </div>
+                <div class="col-md-6 col-md-offset-3">
+                    <h1 class="text-center text__header"><em>Graduation project</em></h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="container movies">
+    <div class="row">
+        <div class="col-md-5 h3">For the day:</div>
+        <div class="col-md-5 col-md-offset-1 h3">For the last 3 hours:</div>
+    </div>
+    <div class="row">
+        <div class="col-md-5 ">
+            <ol>
+                {%for i in weather%}
+                <li class="h4 movies__name li__links">In {{i['time']}} temperature {{i['temperature']}} C</li>
+                {%endfor%}
+            </ol>
+        </div>
+        <div class="col-md-5 col-md-offset-1 title__courses h3">
+            <ol>
+                {%for time, temp in three_hours_weather.items()%}
+                <li class="h4 movies__name li__links">In {{time}} temperature {{temp}} C</li>
+                {%endfor%}
+            </ol>
+        </div>
+        <div class="col-md-5 col-md-offset-1 title__courses h3">
+            <form class="form-inline" method="post" action="/process_weather_by_city">
+                <div class="input__city">City weather:</div>
+                <input type="text" id="inputCity" name="city" class="form-control" placeholder="City" required>
+                <button type="submit" class="btn btn-default">Find</button>
+            </form>
+            <div class="h4 city__weather">{{city_weather}}</div>
+        </div>
+        <div class="col-md-5 col-md-offset-1 title__courses h3">
+            <form class="form-inline" method="post" action="/process_weather">
+                <div class="input__city">Weather in Minsk by date:</div>
+                <input type="text" id="inputCity" name="date" class="form-control" placeholder="yyyy-mm-dd" required>
+                <button type="submit" class="btn btn-default">Find</button>
+            </form>
+            {{error}}
+            <div class="h4 city__weather">Temperature during the day: {{weather_date_day}}</div>
+            <div class="h4 city__weather">Temperature during the night: {{weather_date_night}}</div>
+        </div>
+    </div>
+</div>
+<footer class="footer navbar-fixed-bottom row">
+    <div>
+        <div class="col-md-6 col-md-offset-3">
+            <div class="text-center text__footer">2019 Bortnovskiy Gleb</div>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
