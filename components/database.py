@@ -54,7 +54,7 @@ def insert_courses_by_date(year, month, count_days_in_month, cursor):
 
 
 def insert_movies_by_date(year, month, count_days_in_month, cursor):
-    for day in daterange(1, count_days_in_month + 1):
+    for day in range(1, count_days_in_month + 1):
         url = f'https://www.kinopoisk.ru/premiere/ru/date/{year}-{month}-{day}/'
         html = get_html(url)
         soup = bs(html.text, 'lxml')
