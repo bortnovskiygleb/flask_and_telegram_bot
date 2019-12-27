@@ -31,40 +31,6 @@ def get_html(url):
     return r
 
 
-def insert_weather_by_date(year, month, month_word, count_days_in_month, cursor):
-    for day in range(1, count_days_in_month + 1):
-        url = f'https://pogoda.mail.ru/prognoz/minsk/{day}-{month_word}/#{year}'
-        html = get_html(url)
-        soup = bs(html.text, 'lxml')
-        blocks = soup.find_all('div', {'class': ['cols__column__item cols__column__item_2-1 cols__column__item_2-1_ie8']})[0]
-        temperature = blocks.find_all('div', {'class': {'day__temperature'}})
-
-        day_temperature = temperature[2].get_text()
-        night_temperature = temperature[0].get_text()
-        params = (day_temperature, night_temperature, f'{year}-{month}-{day}')
-        cursor.execute("INSERT INTO weather (day_temperature, night_temperature, date) VALUES (%s, %s, %s)", params)
-
-
-def insert_courses_by_date(year, month, count_days_in_month, cursor):
-    for i in range(1, count_days_in_month + 1):
-        list_courses = get_money_on_date(f'{i}-{month}-{year}')
-        for course in list_courses:
-            money = (course['Cur_Name'], course['Cur_OfficialRate'], course['Date'].split('T')[0])
-            cursor.execute("INSERT INTO courses (name, value, date) VALUES (%s, %s, %s)", money)
-
-
-def insert_movies_by_date(year, month, count_days_in_month, cursor):
-    for day in range(1, count_days_in_month + 1):
-        url = f'https://www.kinopoisk.ru/premiere/ru/date/{year}-{month}-{day}/'
-        html = get_html(url)
-        soup = bs(html.text, 'lxml')
-        blocks = soup.find_all('div', {'class': ['premier_item']})
-        for block in blocks:
-            name = block.find('span', {'class': ['name']}).find('a').get_text()
-            params = (name, f'{year}-{month}-{day}')
-            cursor.execute("INSERT INTO movies (name, date) VALUES (%s, %s)", params)
-
-
 def select_money_by_date(year, month, day, cursor):
     date = f'{year}-{month}-{day}'
     sql = f"select name, value from courses where date='{date}'"
